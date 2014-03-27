@@ -1,0 +1,15 @@
+<!-- <div class="navbar navbar-default navbar-fixed-top">
+	<h1>List of ALL. TEH. QUESTIONS.</h1>
+</div>
+<%= link_to "Create New Question", new_question_path %>
+could use a url instead of a path (esp. for sending something externally: e.g. an email), but more meaningful with path -->
+
+<% @questions.each do |question| %>
+	<div class="jumbotron">
+	<h2><%= link_to question.title, question %></h2>
+	<!-- the last 'question' is shorthand for 'question_path(question)' -->
+	<p><%= question.description %></p>
+	<p>Created on: <%= formatted_date(question.created_at) %></p>
+	<br>
+	</div>
+<% end %>
