@@ -10,6 +10,8 @@ gem 'quiet_assets'
 
 gem 'bootstrap-sass', '~> 3.1.1'
 
+gem 'haml-rails'
+
 group :development do
 	gem 'hirb'
 	gem 'interactive_editor'

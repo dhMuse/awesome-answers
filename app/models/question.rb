@@ -7,6 +7,8 @@ class Question < ActiveRecord::Base
 
 		default_scope {order("title ASC")} #careful with defaults, as the will apply to all queries
 
+		has_many :answers, dependent: :destroy
+
 		def self.recent_ten
 			order("created_at DESC").limit(10)
 		end

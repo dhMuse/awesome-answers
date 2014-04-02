@@ -16,7 +16,10 @@ AwesomeAnswers::Application.routes.draw do
   # delete "questions/:id"      => "questions#destroy"
   # all the above commented code can be written as the following
 
+  resources :answers, only: [:index]
+
   resources :questions do #you can also specify with ", only: [:index, :update]" or ", except: [:index]"
+    resources :answers, except: [:index]
     post :vote_up, on: :member
     post :vote_down, on: :member
     # or 
