@@ -8,6 +8,12 @@
 /.bundle
 /config/database.yml
 
+/config/initializers/email_vars.rb
+/config/initializers/s3_vars.rb
+/config/intializers/api_keys_for_twitter.rb
+
+/public/system
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal

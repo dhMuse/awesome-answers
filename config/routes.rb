@@ -1,10 +1,15 @@
 AwesomeAnswers::Application.routes.draw do
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
+# route order matters; searching matches top to bottom, and stops when it finds a match.
+
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
   # http verb "path or url" => "controller#action"
   get "/about_us" => "home#about"
-
   get "/faq" => "home#faq"
-
   get "/help" => "help#index"
 
   # get   "/questions"          => "questions#index"
@@ -19,15 +24,20 @@ AwesomeAnswers::Application.routes.draw do
   resources :answers, only: [:index]
 
   resources :questions do #you can also specify with ", only: [:index, :update]" or ", except: [:index]"
+    resources :favourites, only: [:create, :destroy]
+    resources :votes, only: [:create, :update, :destroy]
     resources :answers, except: [:index]
-    post :vote_up, on: :member
-    post :vote_down, on: :member
     # or 
     # member do
     #   post :vote_up
     #   post :vote_down
     # end
     post :search, on: :collection
+  end
+
+  # Don't triple nest routes. To subordinate comments to answers, where answers is nested in qustions, use the following structure:
+  resources :answers, only: [] do
+    resources :comments, only: [:create, :destroy]
   end
 
   root "questions#index"

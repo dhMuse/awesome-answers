@@ -1,0 +1,3 @@
+$("#answer_body").val("");
+$(".answers").prepend("#{j render 'answer', answer: @answer}")
+$("##{dom_id(@answer)}").hide().fadeIn(1000);

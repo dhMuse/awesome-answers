@@ -12,10 +12,42 @@ gem 'bootstrap-sass', '~> 3.1.1'
 
 gem 'haml-rails'
 
+gem 'devise'
+gem 'omniauth-twitter'
+gem 'cancan'
+gem 'activeadmin', git: "https://github.com/gregbell/active_admin.git"
+
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'
+
+gem 'paperclip', '~> 4.1'
+gem 'aws-sdk', '~> 1.5.7'
+
+gem 'fog'
+gem 'rmagick', require: 'RMagick'
+gem 'carrierwave'
+
+gem 'simple_form', git: "https://github.com/plataformatec/simple_form.git"
+
+gem 'simplecov', require: false, group: :test
+
+group :development, :test do
+	gem 'faker'
+	gem 'rspec-rails'
+	gem 'factory_girl_rails'
+	gem 'capybara'
+	gem 'capybara-webkit'
+	gem 'database_cleaner'
+	gem 'spork', '~> 1.0rc'
+end
+
 group :development do
+	gem 'letter_opener'
 	gem 'hirb'
 	gem 'interactive_editor'
 	gem 'awesome_print'
+	gem 'better_errors'
+	gem 'binding_of_caller'
 end
 
 # Use postgresql as the database for Active Record
@@ -35,6 +67,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'

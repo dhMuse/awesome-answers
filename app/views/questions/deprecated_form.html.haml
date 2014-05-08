@@ -1,0 +1,24 @@
+.container
+  .jumbotron
+    %h1 Give me a question
+    = form_for @question do |f|
+      .form_group
+        = f.label :title, "Question here"
+        = f.text_field :title, class: "form-control"
+      .form_group
+        = f.label :description, "Description here"
+        = f.text_area :description, class: "form-control"
+      .form_group
+        = # f.collection_check_boxes :category_ids, Category.order("title"), :id, :title
+        = hidden_field_tag "question[category_ids][]", nil
+        - Category.order("title").each do |cat|
+          .row
+            = check_box_tag "question[category_ids][]", cat.id, @question.category_ids.include?(cat.id), id: dom_id(cat)
+            = label_tag dom_id(cat), cat.title
+      .form_group
+        = f.submit (@question.persisted? ? "Update" : "Save"), class: "btn btn-primary"
+%div
+  - if @question.errors.any?
+    %ul
+      - @question.errors.full_messages.each do |message|
+        %li= message

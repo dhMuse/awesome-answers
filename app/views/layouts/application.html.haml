@@ -1,0 +1,28 @@
+!!!
+%html
+  %head
+    %title AwesomeAnswers
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag 'application', 'answerkiller', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    .container
+      .row.navbar.navbar-default.navbar-fixed-top
+        .col-sm-4.col-sm-offset-1
+          %p.row= link_to "All Questions", questions_path
+          %p.row= link_to "Create New Question", new_question_path
+        %span.col-sm-3.navbar-brand Questions
+        .col-sm-3.pull-right
+          .row
+            - if user_signed_in?
+              .custo.col-sm-6.col-sm-offset-2
+                Hello #{current_user.full_name}
+              .col-sm-4
+                = link_to "Sign Out", destroy_user_session_path, method: :delete
+            - else
+              = link_to "Sign In", new_user_session_path
+              |
+              = link_to "Sign In with Twitter", user_omniauth_authorize_path(:twitter)
+      - if flash[:notice] || flash[:alert] || flash[:error]
+        %h3= flash[:notice] || flash[:alert]  || flash[:error]
+      = yield

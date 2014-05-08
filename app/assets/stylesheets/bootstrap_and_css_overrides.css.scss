@@ -1,1 +1,14 @@
 @import "bootstrap";
+.btn {
+	margin: 2px;
+}
+html {background-color: #AAFFDD;}
+body {background-color: #AAFFDD;}
+.container {margin-top: 100px; background-color: #AAFFDD;}
+.navbar {padding-top: 10px; background-color: #EEFFEE;}
+.jumbotron {background-color: #EEFFEE;}
+.well {background-color: #EEFFEE;}
+$custom-font-size: 18px;
+.row{
+	.custo {font-size: $custom-font-size;}
+}

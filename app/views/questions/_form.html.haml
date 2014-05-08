@@ -1,0 +1,7 @@
+= simple_form_for @question, html: {class: "form-horizontal"} do |f|
+	= f.input :title, label: "Question here"
+	= f.input :description, label: "Description here"
+	= f.input :image
+	= f.collection_check_boxes :category_ids, Category.order("title"), :id, :title, item_wrapper_class: "form-group"
+	%br
+	= f.submit class: "btn btn-primary"

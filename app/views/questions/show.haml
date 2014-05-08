@@ -1,31 +1,63 @@
-%h1= @question.title
-%p= @question.description
-%p= @question.created_at.strftime("%Y-%b-%d")
-%p
-  Vote count: #{@question.vote_count}
-%br/
-- if session[:has_voted]
-  You voted already!
+= cache ["show", @question] do
+  %h1= @question.title
+  %p= @question.description
+  %p= @question.created_at.strftime("%Y-%b-%d")
+  %p Created by #{@question.user.full_name}
+  %p Answer count: #{@question.answers.count}
+  %p Vote count: #{@question.vote_count}
+  - if @question.image.present?
+    =image_tag @question.image.url(:medium)
+
+%br
+- if @favourite
+  = button_to "De-favourite", question_favourite_path(@question, @favourite), method: :delete, class: "btn btn-info"
 - else
-  = button_to "Vote Up", vote_up_question_path(@question)
-%br/
-= link_to "Edit", edit_question_path(@question), class: "btn btn-success"
-%br/
-= button_to "Delete", @question, method: :delete, data: {confirm: "Are you sure you want to delete this question?"}
-%br/
-= link_to "All Questions", questions_path
+  = button_to "Favourite", question_favourites_path(@question), method: :post, class: "btn btn-info"
+- if @question.favourited_users.present?
+  Favourited Users:
+  = @question.favourited_users.map(&:full_name).join(", ")
+
+%br
+- if @question.categories.any?
+  Categories (#{@question.categories.count}):
+  = @question.categories.map(&:title).join(", ")
+
+%br
+- if @vote.persisted? && @vote.is_up?
+  = button_to "Undo", [@question, @vote], method: :delete, class: "btn btn-primary"
+- else
+  = form_for [@question, @vote] do |f|
+    = f.hidden_field :is_up, value: true
+    = f.submit "Vote Up", class: "btn btn-primary"
+%br
+- if @vote.persisted? && !@vote.is_up?
+  = button_to "Undo", [@question, @vote], method: :delete, class: "btn btn-primary"
+- else
+  = form_for [@question, @vote] do |f|
+    = f.hidden_field :is_up, value: false
+    = f.submit "Vote Down", class: "btn btn-primary"
+
+%br
+- if can? :edit, @question
+  = link_to "Edit", edit_question_path(@question), class: "btn btn-warning"
+%br
+- if can? :delete, @question
+  = button_to "Delete", @question, method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure you want to delete this question?"}
+
+%br
 %h2 Add An Answer
 - if @answer.errors.any?
   %ul
     - @answer.errors.full_messages.each do |message|
       %li= message
 / = form_for [@question, @answer] do |f| is the same as the next line
-= form_for @answer, url: question_answers_path(@question) do |f|
+= form_for [@question, @answer], remote: true do |f|
   = f.text_area :body
   %br
-  = f.submit "Submit an answer", class: "btn btn-primary"
-  %hr
-  - @question.answers.each do |answer|
-    .well
-      %p= answer.body
-      %p Created on #{formatted_date(answer.created_at)}
+  = f.submit "Submit an answer", class: "btn btn-success", data: {disable_with: "Saving..."}
+%br
+= cache @answers do
+  .answers= render @answers
+/ - @answers.each do |answer|
+/   = render "/answers/answer", answer: answer
+/ the third line above is a shortcut for the next two lines. Note, the partial must be named in the singular of the variable passed.
