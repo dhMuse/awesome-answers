@@ -4,7 +4,6 @@
   </div>
   <haml_loud> link_to &quot;Create New Question&quot;, new_question_path </haml_loud>
   kcould use a url instead of a path (esp. for sending something externally: e.g. an email), but more meaningful with path
-= link_to "Create New Question", new_question_path, class: "btn btn-primary"
 %h2 Recent Questions
 - cache "recent_questions", skip_digest: true do
   - @recent_questions.each do |question|

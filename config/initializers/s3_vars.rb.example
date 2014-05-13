@@ -1,0 +1,3 @@
+ENV['s3_access_key_id'] = 'yourpublickey'
+ENV['s3_secret_key_id'] = 'yourprivatekey'
+ENV['s3_bucket'] = 'yourbucketname'

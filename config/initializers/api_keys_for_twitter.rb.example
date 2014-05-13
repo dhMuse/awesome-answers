@@ -1,0 +1,2 @@
+ENV["TWITTER_API_KEY"] = "yourpublickey"
+ENV["TWITTER_API_SECRET"] = "yoursecretkey"

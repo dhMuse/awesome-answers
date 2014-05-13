@@ -1,28 +1,21 @@
-== README
+==Awesome Answers
+This is a user-friendly question-and-answer platform built with Ruby on Rails.
+I created it as part of learning Rails during the CodeCore Developer Bootcamp.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To run the app, there are a few things you'll need to do:
 
-Things you may want to cover:
+You will need to have Ruby and Rails installed on your computer.
+Then, clone the app by following the instructions on GitHub.
 
-* Ruby version
+To get everything to work correctly, you'll need to create/edit five config files, listed in '.gitignore' lines 9-14; these files have examples (named as '.example') that you can rename by removing the '.example' part and then edit.
+* Most importantly, you'll need a file called 'database.yml', in which you'll need to change the two 'username' fields to something appropriate to your local environment in order to set up the database correctly.
+* Also, you should rename 'secret_token.rb.example' and add a new random token to it by following the instructions in that file.
+* Furthermore, you should also rename and edit the files 'api_keys_for_twitter.rb.example', 'email_vars.rb.example', and 's3_vars.rb.example' to have keys appropriate to services you'd like to use, although the application might be able to run without these set up. These keys will vary depending on whether you have accounts with Twitter and Amazon Web Services S3 hosting, and what kind of email service you'd prefer to use.
 
-* System dependencies
+Once you have set the configs, run these two lines in Terminal from the folder in which you put the app:
+* bundle
+* rake db:create db:migrate
 
-* Configuration
+Finally, launch a local server and direct your internet browser of choice to the appopropriate port (default 3000). You should now be able to see the app homepage in your browser!
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+You are free to clone this application and play around with it, or use it for any purpose you like!

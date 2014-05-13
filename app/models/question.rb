@@ -1,7 +1,7 @@
 # controllers are named in the plural, models in the singular
 class Question < ActiveRecord::Base
-		validates :title, presence: {message: "must be present"}, uniqueness: true
-		validates_presence_of :description, message: "must be present"
+		validates :title, presence: {message: "Title must be present"}, uniqueness: true
+		validates_presence_of :description, message: "Description must be present"
 
 		# after_initialize :set_defaults
 

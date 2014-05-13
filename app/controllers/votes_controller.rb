@@ -3,7 +3,6 @@ class VotesController < ApplicationController
 	before_action :find_question
 
 	def create
-		@question = Question.find(params[:question_id])
 		@vote = @question.votes.new(vote_params)
 		@vote.user = current_user
 		if @vote.save

@@ -10,7 +10,8 @@
 
 /config/initializers/email_vars.rb
 /config/initializers/s3_vars.rb
-/config/intializers/api_keys_for_twitter.rb
+/config/initializers/api_keys_for_twitter.rb
+/config/initializers/secret_token.rb
 
 /public/system
 
